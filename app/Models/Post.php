@@ -15,6 +15,33 @@ class Post extends Model
 //    protected $guarded = ['id'];
 //    protected $fillable = ['title', 'excerpt', 'body', 'category_id', 'slug'];
 
+    public function scopeFilter($query, array $filters){ //Post::newQuery()->filter()
+        //$query->where
+        if ($filters['search'] ?? false) { //mesma coisa que o isset
+            $query
+                ->where('title', 'like', '%' .request('search') . '%')
+                ->orWhere('body', 'like', '%' . request('search') . '%');
+        }
+
+        $query->when($filters['category'] ?? false, fn($query, $category) =>
+            $query->whereHas('category', fn($query) =>
+                $query->where('slug', $category)
+            )
+        );
+
+        $query->when($filters['author'] ?? false, fn($query, $author) =>
+            $query->whereHas('author', fn($query) =>
+            $query->where('username', $author)
+            )
+        );
+//            $query
+//                ->whereExists(fn($query) =>
+//                    $query->from('categories')
+//                        ->whereColumn('categories.id', 'posts.category_id')
+//                        ->where('categories.slug', $category)
+//                )
+//        );
+    }
 
     public function category(){
         //hasOne, hasMany, belongsTo, belongsToMany
