@@ -30,11 +30,19 @@
             <div>
                 <p class="small text-muted">
                     {!! __('Showing') !!}
+<<<<<<< HEAD
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
                     {!! __('to') !!}
                     <span class="font-medium">{{ $paginator->lastItem() }}</span>
                     {!! __('of') !!}
                     <span class="font-medium">{{ $paginator->total() }}</span>
+=======
+                    <span class="fw-semibold">{{ $paginator->firstItem() }}</span>
+                    {!! __('to') !!}
+                    <span class="fw-semibold">{{ $paginator->lastItem() }}</span>
+                    {!! __('of') !!}
+                    <span class="fw-semibold">{{ $paginator->total() }}</span>
+>>>>>>> 9ecf656173dee0ff998622a25dd59c94da2dc3eb
                     {!! __('results') !!}
                 </p>
             </div>

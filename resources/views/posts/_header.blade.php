@@ -42,6 +42,10 @@
                 @if (request('category'))
                     <input type="hidden" name="category" value="{{ request('category') }}">
                 @endif
+<<<<<<< HEAD
+=======
+                
+>>>>>>> 9ecf656173dee0ff998622a25dd59c94da2dc3eb
                 <input type="text" name="search" placeholder="Find something"
                     class="bg-transparent placeholder-black font-semibold text-sm"
                     value="{{ request('search') }}">
