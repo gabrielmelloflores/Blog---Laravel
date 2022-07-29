@@ -24,6 +24,9 @@
 
         @if($posts->count())
             <x-posts-grid :posts="$posts"></x-posts-grid>
+
+            {{ $posts->links() }} {{--PAGINATION--}}
+
         @else
             <p class="text-center" >No post yet. Please check back later.</p>
         @endif
