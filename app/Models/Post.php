@@ -11,7 +11,6 @@ class Post extends Model
 
     //Para não realizar diversas sql no foreach
     protected $with = ['category', 'author'];
-    protected  $guarded = [];
 //    protected $guarded = ['id'];
 //    protected $fillable = ['title', 'excerpt', 'body', 'category_id', 'slug'];
 
@@ -44,6 +43,10 @@ class Post extends Model
 //                        ->where('categories.slug', $category)
 //                )
 //        );
+    }
+    public function comments(){
+        //hasOne, hasMany, belongsTo, belongsToMany
+        return $this->hasMany(Comment::class);
     }
 
     public function category(){

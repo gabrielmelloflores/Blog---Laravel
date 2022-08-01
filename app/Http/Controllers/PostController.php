@@ -26,4 +26,7 @@ class PostController extends Controller
             'post' => $post
         ]);
     }
+
+    //index, show, create, store, edit, update, destroy
+
 }

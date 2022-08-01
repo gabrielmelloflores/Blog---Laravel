@@ -45,9 +45,17 @@
                 </h1>
 
                 <div class="space-y-4 lg:text-lg leading-loose">
-                   {{ $post->body }}
+                   {!! $post->body !!}
                 </div>
             </div>
+
+            <section class="col-span-8 col-start-5 mt-10 space-y-6">
+                @include ('posts._add-comment-form')
+
+                @foreach ($post->comments as $comment)
+                    <x-post-comment :comment="$comment" />
+                @endforeach
+            </section>
         </article>
     </main>
 </x-layout>
