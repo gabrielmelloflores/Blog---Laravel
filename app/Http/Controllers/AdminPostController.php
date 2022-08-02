@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class AdminPostController extends Controller
 {
@@ -11,5 +12,37 @@ class AdminPostController extends Controller
         return view('admin.posts.index', [
             'posts' => Post::paginate(50)
         ]);
+    }
+
+    public function create(Post $post)
+    {
+//        if(auth()->guest()){
+//            abort(403);
+//        }
+        return view('admin.posts.create');
+    }
+
+    public function store(Post $post)
+    {
+        $attributes = request()->validate([
+            'title' => 'required',
+            'thumbnail' => ['required', 'image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
+
+        $attributes['user_id'] = auth()->id();
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
+
+        Post::create($attributes);
+
+        return redirect('/');
+    }
+
+    public function edit(Post $post)
+    {
+        return view('admin.posts.edit', ['post' => $post]);
     }
 }
